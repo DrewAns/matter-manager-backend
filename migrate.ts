@@ -212,22 +212,6 @@ async function runEtl(): Promise<void> {
   for (const batch of batches) {
     await prisma.internalNote.createMany({ data: batch });
   }
-
-  // Email Config
-  await prisma.smtpConfig.create({
-    data: {
-      host: 'smtp.office365.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      maxConnections: 30,
-      tlsRejectUnauthorized: false,
-      tlsCiphers: 'SSLv3',
-      service: 'Outlook365',
-      user: 'ansbachertest@heartutilities.com',
-      pass: 'T3st09Microsft*',
-    },
-  });
 }
 
 runEtl().then((_) => process.exit());
